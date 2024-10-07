@@ -137,68 +137,85 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Align(
-                alignment: Alignment.bottomLeft, // 왼쪽 아래로 정렬
-                child: Text(
-                  'Pages',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 30), // 글씨 색상을 흰색으로 설정
+                decoration: BoxDecoration(
+                  color: Colors.blue,
                 ),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.blue,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Align(
+                    alignment: Alignment.bottomLeft, // 왼쪽 아래로 정렬
+                    child: Text(
+                      'Pages',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 30), // 글씨 색상을 흰색으로 설정
+                    ),
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.home,
+                  color: Colors.blue[300],
+                ),
+                title: Text('Home'),
+                onTap: () {
+                  Navigator.pop(context); // 드로어 닫기
+                },
               ),
             ),
-            ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Colors.blue[300],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.search,
+                  color: Colors.blue[300],
+                ),
+                title: Text('Search'),
+                onTap: () {
+                  Navigator.pop(context); // 드로어 닫기
+                },
               ),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pop(context); // 드로어 닫기
-              },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.search,
-                color: Colors.blue[300],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.location_city,
+                  color: Colors.blue[300],
+                ),
+                title: Text('Favorite Hotel'),
+                onTap: () {
+                  Navigator.pop(context); // 드로어 닫기
+                },
               ),
-              title: Text('Search'),
-              onTap: () {
-                Navigator.pop(context); // 드로어 닫기
-              },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.location_city,
-                color: Colors.blue[300],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.blue[300],
+                ),
+                title: Text('My Page'),
+                onTap: () {
+                  Navigator.pop(context); // 드로어 닫기
+                },
               ),
-              title: Text('Favorite Hotel'),
-              onTap: () {
-                Navigator.pop(context); // 드로어 닫기
-              },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.person,
-                color: Colors.blue[300],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.logout,
+                  color: Colors.blue[300],
+                ),
+                title: Text('Log Out'),
+                onTap: () {
+                  Navigator.pop(context); // 드로어 닫기
+                  Navigator.pushNamed(context, '/login');
+                },
               ),
-              title: Text('My Page'),
-              onTap: () {
-                Navigator.pop(context); // 드로어 닫기
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.logout,
-                color: Colors.blue[300],
-              ),
-              title: Text('Log Out'),
-              onTap: () {
-                Navigator.pop(context); // 드로어 닫기
-                Navigator.pushNamed(context, '/login');
-              },
             ),
           ],
         ),
