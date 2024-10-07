@@ -88,17 +88,29 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       // TODO: Add app bar (102)
       appBar: AppBar(
-        // TODO: Add buttons and title (102)
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            print('Menu button');
+        backgroundColor: Colors.blue,
+        iconTheme: IconThemeData(
+          color: Colors.white, // 아이콘 색상
+        ),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                semanticLabel: 'menu',
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer(); // 햄버거 열기
+              },
+            );
           },
         ),
-        title: const Text('SHRINE'),
+        title: const Text('Menu'), // 제목
+        titleTextStyle: TextStyle(
+          color: Colors.white, // 제목 텍스트 색상
+          fontSize: 25,
+        ),
+        centerTitle: true, // 제목 중간
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -111,8 +123,8 @@ class HomePage extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
+              Icons.language,
+              semanticLabel: 'language',
             ),
             onPressed: () {
               print('Filter button');
@@ -120,7 +132,77 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      // TODO: Add trailing buttons (102)
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Align(
+                alignment: Alignment.bottomLeft, // 왼쪽 아래로 정렬
+                child: Text(
+                  'Pages',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 30), // 글씨 색상을 흰색으로 설정
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.home,
+                color: Colors.blue[300],
+              ),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // 드로어 닫기
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.search,
+                color: Colors.blue[300],
+              ),
+              title: Text('Search'),
+              onTap: () {
+                Navigator.pop(context); // 드로어 닫기
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.location_city,
+                color: Colors.blue[300],
+              ),
+              title: Text('Favorite Hotel'),
+              onTap: () {
+                Navigator.pop(context); // 드로어 닫기
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.person,
+                color: Colors.blue[300],
+              ),
+              title: Text('My Page'),
+              onTap: () {
+                Navigator.pop(context); // 드로어 닫기
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.logout,
+                color: Colors.blue[300],
+              ),
+              title: Text('Log Out'),
+              onTap: () {
+                Navigator.pop(context); // 드로어 닫기
+                Navigator.pushNamed(context, '/login');
+              },
+            ),
+          ],
+        ),
+      ),
 
       // TODO: Add a grid view (102)
       body: GridView.count(
@@ -129,6 +211,7 @@ class HomePage extends StatelessWidget {
           childAspectRatio: 8.0 / 9.0,
           children: _buildGridCards(context) // Changed code
           ),
+
       // TODO: Set resizeToAvoidBottomInset (101)
       // 키보드의 영향으로 화면이 변경되지 않음
       resizeToAvoidBottomInset: false,

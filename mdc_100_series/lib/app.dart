@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'login.dart';
+import 'signup.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
@@ -30,6 +31,12 @@ class ShrineApp extends StatelessWidget {
         '/login': (BuildContext context) => const LoginPage(),
         // TODO: Change to a Backdrop with a HomePage frontLayer (104)
         '/': (BuildContext context) => const HomePage(),
+        '/signup': (BuildContext context) => const SignupPage(),
+        '/home': (BuildContext context) => const SignupPage(),
+        '/search': (BuildContext context) => const SignupPage(),
+        '/favoritehotels': (BuildContext context) => const SignupPage(),
+        '/mypage': (BuildContext context) => const SignupPage(),
+        '/logout': (BuildContext context) => const SignupPage(),
         // TODO: Make currentCategory field take _currentCategory (104)
         // TODO: Pass _currentCategory for frontLayer (104)
         // TODO: Change backLayer field value to CategoryMenuPage (104)
