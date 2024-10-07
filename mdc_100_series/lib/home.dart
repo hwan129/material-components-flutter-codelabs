@@ -18,14 +18,19 @@ import 'package:intl/intl.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  // TODO: Make a collection of cards (102)
-  // Replace this entire method
-  List<Card> _buildGridCards(BuildContext context) {
-    List<Product> products = ProductsRepository.loadProducts(Category.all);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  final List<bool> _selectedView = <bool>[true, false];
+
+  List<Product> products = ProductsRepository.loadProducts(Category.all);
+
+  List<Widget> _buildCards(BuildContext context) {
     if (products.isEmpty) {
       return const <Card>[];
     }
@@ -37,9 +42,7 @@ class HomePage extends StatelessWidget {
     return products.map((product) {
       return Card(
         clipBehavior: Clip.antiAlias,
-        // TODO: Adjust card heights (103)
         child: Column(
-          // TODO: Center items on the card (103)
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AspectRatio(
@@ -47,7 +50,6 @@ class HomePage extends StatelessWidget {
               child: Image.asset(
                 product.assetName,
                 package: product.assetPackage,
-                // TODO: Adjust the box size (102)
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -55,11 +57,8 @@ class HomePage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                 child: Column(
-                  // TODO: Align labels to the bottom and center (103)
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  // TODO: Change innermost Column (103)
                   children: <Widget>[
-                    // TODO: Handle overflowing labels (103)
                     Text(
                       product.name,
                       style: theme.textTheme.titleLarge,
@@ -72,6 +71,52 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+  }
+
+  // ListView용 카드 빌더 (AspectRatio 제거)
+  List<Widget> _buildListCards(BuildContext context) {
+    if (products.isEmpty) {
+      return const <Card>[];
+    }
+
+    final ThemeData theme = Theme.of(context);
+    final NumberFormat formatter = NumberFormat.simpleCurrency(
+        locale: Localizations.localeOf(context).toString());
+
+    return products.map((product) {
+      return Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Image.asset(
+              product.assetName,
+              package: product.assetPackage,
+              fit: BoxFit.fitWidth,
+              height: 100.0, // ListView에서는 고정된 높이를 설정
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    product.name,
+                    style: theme.textTheme.titleLarge,
+                    maxLines: 1,
+                  ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    formatter.format(product.price),
+                    style: theme.textTheme.titleSmall,
+                  ),
+                ],
               ),
             ),
           ],
@@ -119,6 +164,7 @@ class HomePage extends StatelessWidget {
             ),
             onPressed: () {
               print('Search button');
+              Navigator.pushNamed(context, '/search');
             },
           ),
           IconButton(
@@ -221,15 +267,54 @@ class HomePage extends StatelessWidget {
         ),
       ),
 
-      // TODO: Add a grid view (102)
-      body: GridView.count(
-          crossAxisCount: 2,
-          padding: const EdgeInsets.all(16.0),
-          childAspectRatio: 8.0 / 9.0,
-          children: _buildGridCards(context) // Changed code
+      body: Column(
+        children: <Widget>[
+          // 토글 버튼 추가
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ToggleButtons(
+              isSelected: _selectedView,
+              onPressed: (int index) {
+                setState(() {
+                  for (int buttonIndex = 0;
+                      buttonIndex < _selectedView.length;
+                      buttonIndex++) {
+                    if (buttonIndex == index) {
+                      _selectedView[buttonIndex] = true;
+                    } else {
+                      _selectedView[buttonIndex] = false;
+                    }
+                  }
+                });
+              },
+              children: <Widget>[
+                Icon(
+                  Icons.grid_on,
+                  color: _selectedView[0] ? Colors.blue : Colors.grey,
+                ), // GridView 아이콘
+                Icon(
+                  Icons.list,
+                  color: _selectedView[1] ? Colors.blue : Colors.grey,
+                ), // ListView 아이콘
+              ],
+            ),
           ),
-
-      // TODO: Set resizeToAvoidBottomInset (101)
+          Expanded(
+            // 토글에 따라 GridView 또는 ListView 표시
+            child: _selectedView[0]
+                ? GridView.count(
+                    crossAxisCount: 2,
+                    padding: const EdgeInsets.all(16.0),
+                    childAspectRatio: 8.0 / 9.0,
+                    children: _buildCards(context),
+                  )
+                : ListView(
+                    padding: const EdgeInsets.all(16.0),
+                    children: _buildListCards(context),
+                  ),
+          ),
+        ],
+      ),
       // 키보드의 영향으로 화면이 변경되지 않음
       resizeToAvoidBottomInset: false,
     );

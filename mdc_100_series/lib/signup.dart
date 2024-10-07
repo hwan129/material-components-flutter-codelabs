@@ -51,8 +51,8 @@ class _SignupPageState extends State<SignupPage> {
   void _signUp() {
     if (_formKey.currentState!.validate()) {
       // 모든 입력이 유효하면 수행할 작업
-      print('Username: $_username, Email: $_email');
-      // 추가 작업 예: 서버에 가입 정보 전송
+      Navigator.pushNamed(context, '/login');
+      // Navigator.pop(context);
     }
   }
 
