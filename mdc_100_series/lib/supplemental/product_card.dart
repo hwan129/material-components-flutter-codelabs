@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
 
     final imageWidget = Image.asset(
       product.assetName,
-      package: product.assetPackage,
+      // package: product.assetPackage,
       fit: BoxFit.cover,
     );
 
@@ -64,7 +64,7 @@ class ProductCard extends StatelessWidget {
               ),
               const SizedBox(height: 4.0),
               Text(
-                formatter.format(product.price),
+                formatter.format(product.rating),
                 style: theme.textTheme.bodySmall,
               ),
             ],

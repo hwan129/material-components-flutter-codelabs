@@ -12,31 +12,57 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-enum Category {
-  all,
-  accessories,
-  clothing,
-  home,
-}
-
 class Product {
   const Product({
-    required this.category,
     required this.id,
-    required this.isFeatured,
     required this.name,
-    required this.price,
+    required this.rating,
+    required this.location,
+    required this.phoneNumber,
+    required this.description,
   });
 
-  final Category category;
-  final int id;
-  final bool isFeatured;
-  final String name;
-  final int price;
+  final int id; // 호텔 ID
+  final String name; // 호텔 이름
+  final int rating; // 호텔 평점
+  final String location; // 호텔 위치
+  final String phoneNumber; // 호텔 번호
+  final String description; // 호텔 설명
 
-  String get assetName => '$id-0.jpg';
-  String get assetPackage => 'shrine_images';
+  String get assetName => 'assets/img/$id-0.jpg';
 
   @override
   String toString() => "$name (id=$id)";
 }
+
+
+
+
+// enum Category {
+//   all,
+//   accessories,
+//   clothing,
+//   home,
+// }
+
+// class Product {
+//   const Product({
+//     required this.category,
+//     required this.id,
+//     required this.isFeatured,
+//     required this.name,
+//     required this.price,
+//   });
+
+//   final Category category;
+//   final int id;
+//   final bool isFeatured;
+//   final String name;
+//   final int price;
+
+//   String get assetName => '$id-0.jpg';
+//   String get assetPackage => 'shrine_images';
+
+//   @override
+//   String toString() => "$name (id=$id)";
+// }
