@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'model/product.dart';
 import 'model/products_repository.dart';
 import 'detail.dart';
+
+final Uri _url = Uri.parse('https://www.handong.edu/');
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,14 +20,16 @@ class _HomePageState extends State<HomePage> {
 
   List<Product> products = ProductsRepository.loadProducts();
 
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
   List<Widget> _buildCards(BuildContext context) {
     if (products.isEmpty) {
       return const <Card>[];
     }
-
-    final ThemeData theme = Theme.of(context);
-    final NumberFormat formatter = NumberFormat.simpleCurrency(
-        locale: Localizations.localeOf(context).toString());
 
     // grid view
     if (_selectedView[0]) {
@@ -261,7 +266,7 @@ class _HomePageState extends State<HomePage> {
               semanticLabel: 'language',
             ),
             onPressed: () {
-              print('Filter button');
+              _launchUrl();
             },
           ),
         ],
@@ -333,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 title: Text('My Page'),
                 onTap: () {
-                  Navigator.pop(context); // 드로어 닫기
+                  Navigator.pushNamed(context, '/mypage');
                 },
               ),
             ),

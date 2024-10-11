@@ -5,6 +5,7 @@ import 'home.dart';
 import 'login.dart';
 import 'signup.dart';
 import 'favorite.dart';
+import 'mypage.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
@@ -23,7 +24,7 @@ class ShrineApp extends StatelessWidget {
         '/home': (BuildContext context) => const SignupPage(),
         '/search': (BuildContext context) => const SearchPage(),
         '/favorite': (BuildContext context) => const FavoritePage(),
-        '/mypage': (BuildContext context) => const SignupPage(),
+        '/mypage': (BuildContext context) => const MyPage(),
         // '/detail': (BuildContext context) {
         //   final Product product =
         //       ModalRoute.of(context)!.settings.arguments as Product;
