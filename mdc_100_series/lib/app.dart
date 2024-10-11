@@ -4,7 +4,7 @@ import 'package:shrine/search.dart';
 import 'home.dart';
 import 'login.dart';
 import 'signup.dart';
-import 'search.dart';
+import 'favorite.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
@@ -22,7 +22,7 @@ class ShrineApp extends StatelessWidget {
         '/signup': (BuildContext context) => const SignupPage(),
         '/home': (BuildContext context) => const SignupPage(),
         '/search': (BuildContext context) => const SearchPage(),
-        '/favoritehotels': (BuildContext context) => const SignupPage(),
+        '/favorite': (BuildContext context) => const FavoritePage(),
         '/mypage': (BuildContext context) => const SignupPage(),
         // '/detail': (BuildContext context) {
         //   final Product product =

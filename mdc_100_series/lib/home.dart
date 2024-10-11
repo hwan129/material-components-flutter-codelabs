@@ -308,7 +308,6 @@ class _HomePageState extends State<HomePage> {
                 title: Text('Search'),
                 onTap: () {
                   Navigator.pushNamed(context, '/search');
-                  Navigator.pop(context); // 드로어 닫기
                 },
               ),
             ),
@@ -321,7 +320,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 title: Text('Favorite Hotel'),
                 onTap: () {
-                  Navigator.pop(context); // 드로어 닫기
+                  Navigator.pushNamed(context, '/favorite');
                 },
               ),
             ),
